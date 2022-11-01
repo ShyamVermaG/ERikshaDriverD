@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:id="@+id/yes"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:background="@drawable/card_img"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/finish_ride">
+
+        </ImageView>
+        <TextView
+            android:id="@+id/finishT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:text="@string/finish"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/No"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_margin="5dp"
+        android:background="@drawable/card_img"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:src="@drawable/cancelride">
+
+        </ImageView>
+        <TextView
+            android:id="@+id/cancelT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:text="@string/cancel"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

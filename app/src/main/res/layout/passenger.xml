@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".passenger">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <fragment
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:id="@+id/map"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:background="@drawable/head_back"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="gotoBack"
+                android:src="@drawable/ic_baseline_arrow_back_24"/>
+            <TextView
+                android:id="@+id/passengerT"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content"
+                android:text="@string/passenger"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+            <ImageView
+                android:onClick="gotoRoute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_route"/>
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/startLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:text="current Loc"
+            android:textColor="@color/blue"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/locationSpinStrtCon"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/card_img_nor"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="5dp">
+
+            <Spinner
+                android:id="@+id/locationSpinStrt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:outlineSpotShadowColor="@color/black" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/con"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>
+

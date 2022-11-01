@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/blank.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/card_img_nor.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/card_img_nor_green.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/card_img_nor_red.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/card_img_ripple.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/green_btn.xml" value="0.136" />
+        <entry key="app/src/main/res/drawable/head_back.xml" value="0.177" />
+        <entry key="app/src/main/res/drawable/ic_baseline_outlined_flag_24.xml" value="0.1415" />
+        <entry key="app/src/main/res/drawable/ic_correct.xml" value="0.177" />
+        <entry key="app/src/main/res/drawable/ic_cross.xml" value="0.177" />
+        <entry key="app/src/main/res/drawable/ic_route.xml" value="0.177" />
+        <entry key="app/src/main/res/layout/AllPerson.xml" value="0.13043478260869565" />
+        <entry key="app/src/main/res/layout/Home.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/OnePerson.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/RouteERiksha.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_block.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_login_front.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_update.xml" value="0.17864583333333334" />
+        <entry key="app/src/main/res/layout/oneGrp.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/one_grp.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/one_person.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/onlineReq.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/online_req.xml" value="0.10144927536231885" />
+        <entry key="app/src/main/res/layout/passenger.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/pickUpPerson.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/pick_up_person.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/route_eriksha.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/yesNoDialog.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/yes_no_dialog.xml" value="0.19375" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.19270833333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

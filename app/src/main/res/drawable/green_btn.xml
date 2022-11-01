@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:state_pressed="false">
+        <shape>
+            <corners
+                android:radius="5dp"
+                />
+            <stroke
+                android:width="0.2dp"/>
+            <solid
+                android:color="@color/teal_700"/>
+<!--            <gradient-->
+<!--                android:startColor="@color/teal_200"-->
+<!--                android:endColor="@color/teal_700"-->
+<!--                android:angle="135"/>-->
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <ripple android:color="@color/colorLightgray"
+            tools:targetApi="lollipop">
+
+            <item >
+                <shape android:shape="rectangle">
+
+                    <corners
+                        android:radius="5dp"
+                        />
+                    <stroke
+                        android:width="0.2dp"/>
+                    <solid
+                        android:color="@color/teal_700"/>
+<!--                    <gradient-->
+<!--                        android:startColor="@color/teal_200"-->
+<!--                        android:endColor="@color/teal_700"-->
+<!--                        android:angle="135"/>-->
+                </shape>
+            </item>
+        </ripple>
+    </item>
+</selector>

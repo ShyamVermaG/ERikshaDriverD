@@ -1,0 +1,48 @@
+<resources>
+
+    <string name="app_name">ERiksha Driver</string>
+    <string name="address">Address</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="signup">Sign Up</string>
+    <string name="name">Name</string>
+    <string name="MobileNo">Mobile No</string>
+    <string name="password">Password</string>
+    <string name="RePass">Re Enter Password</string>
+    <string name="otp">O.T.P.</string>
+    <string name="login">Log In</string>
+    <string name="update">Please Update the Application.</string>
+    <string name="addName">Add Person</string>
+    <string name="onePerson">1 Person</string>
+    <string name="threePerson">3 Person</string>
+    <string name="fourPerson">4 Person</string>
+    <string name="twoPerson">2 Person</string>
+    <string name="changeLng">change Language</string>
+    <string name="entrOTP">"Enter the Six digit OTP Number : "</string>
+    <string name="submit">Submit</string>
+    <string name="validOtpTxt">"OTP is only valid for: "</string>
+    <string name="resendTxt">"   Resend OTP"</string>
+    <string name="dontPass">"Dont have password / "</string>
+    <string name="retriePas">Retrieve Password</string>
+    <string name="wlcTxt">Welcome to ERiksha</string>
+    <string name="or">"   Or   "</string>
+    <string name="dontAcco">" Don't have any account / For new users"</string>
+    <string name="onePerPrice">1 Person Price :</string>
+    <string name="seleLoc">Select Locatio</string>
+    <string name="ttlDis">Total Distance :</string>
+    <string name="search">Search</string>
+    <string name="passenger">Passengers</string>
+    <string name="nxtStop">Next Stop</string>
+    <string name="gotPassList">Got A Passenger List</string>
+    <string name="finish">Finished</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="person">Person</string>
+    <string name="Rs">Rs</string>
+    <string name="add">Add</string>
+    <string name="ttlPrice">Total Price</string>
+
+    <string name="key">AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg</string>
+    <string name="versionName">1.8</string>
+    <string name="extrOPrice">Extra 10 Rs price will be taken for solo trip.</string>
+
+</resources>

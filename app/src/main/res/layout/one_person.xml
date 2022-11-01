@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="cancelRide"
+                android:src="@drawable/ic_cross" />
+
+            <TextView
+                android:id="@+id/selectLocH"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/seleLoc"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:onClick="AddPerson"
+                android:src="@drawable/ic_correct" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/startLoc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:text="current Loc"
+            android:textColor="@color/blue"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/locationSpinStrtCon"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/card_img_nor"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:padding="5dp">
+
+            <Spinner
+                android:id="@+id/locationSpinStrt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:outlineSpotShadowColor="@color/black" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_img_nor"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/inputPl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Search Place."
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </EditText>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="getData"
+                android:src="@drawable/ic_voice">
+
+            </ImageView>
+
+            <Button
+                android:id="@+id/searchBtn"
+                android:layout_width="50dp"
+                android:layout_margin="0dp"
+                android:layout_height="match_parent"
+                android:text=""
+                android:background="@drawable/ic_baseline_search_24"
+                android:onClick="searchTxt"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/card_img_nor"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <Spinner
+                android:id="@+id/locationSpin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:outlineSpotShadowColor="@color/black" />
+        </LinearLayout>
+
+
+        <ListView
+            android:id="@+id/list_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            tools:context=".onePerson" />
+
+
+        <!--    total distance  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/ttlDistT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ttlDis"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="1000m"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+            >
+
+        </LinearLayout>
+
+        <!--   one person pricce  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/onePersonT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/onePerPrice"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/oneP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="10 Rs."
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+            >
+
+        </LinearLayout>
+
+
+        <!--   all person price  -->
+        <LinearLayout
+            android:id="@+id/lastPriceC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/onePriceM"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="  10  "
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="   X   "
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/ttlPerson"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="4"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="  =  "
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/ttlPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="60 Rs"
+                android:textColor="@color/blue"
+                android:textSize="24sp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/extrOPrice"
+            android:textColor="@color/red"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+

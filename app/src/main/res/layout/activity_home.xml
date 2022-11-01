@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".HomeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:onClick="gotoPassenList"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/list_person"
+                />
+            <TextView
+                android:id="@+id/addPerson"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/addName"
+                android:textSize="22sp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+
+            <ImageView
+                android:onClick="gotoRoute"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_route"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:id="@+id/add1Pers"
+                android:onClick="add1Person"
+                android:background="@drawable/card_img"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_person_24">
+
+                </ImageView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/onePerson"
+                    android:textStyle="bold"
+                    android:id="@+id/person1"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:onClick="add2Person"
+                android:id="@+id/add2Pers"
+                android:layout_height="wrap_content"
+                android:background="@drawable/card_img"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/two_person">
+
+                </ImageView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/twoPerson"
+                    android:textStyle="bold"
+                    android:id="@+id/person2"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/card_img"
+                android:id="@+id/add3Pers"
+                android:onClick="add3Person"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/three_person">
+
+                </ImageView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/threePerson"
+                    android:textStyle="bold"
+                    android:id="@+id/person3"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:id="@+id/add4Pers"
+                android:onClick="add4Person"
+                android:background="@drawable/card_img"
+                android:layout_margin="10dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp">
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/four_person">
+
+                </ImageView>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:text="@string/fourPerson"
+                    android:textStyle="bold"
+                    android:id="@+id/person4"
+                    android:textColor="@color/black"/>
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:onClick="gotoPenList"
+            android:padding="5dp">
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/chgLng"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="@string/changeLng"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                />
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/switchL"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

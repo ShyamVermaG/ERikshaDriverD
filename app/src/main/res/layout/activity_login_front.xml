@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".LoginFront">
+
+    <TextView
+        android:id="@+id/welcTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wlcTxt"
+        android:textSize="28sp"
+        android:textColor="@color/fontColorHead"
+        android:layout_margin="20dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="200dp"
+        android:id="@+id/logo"
+        android:layout_height="200dp"
+        app:cardCornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcTxt"
+        app:layout_constraintBottom_toTopOf="@+id/Btns">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/e_riksha" />
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <LinearLayout
+        android:id="@+id/Btns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+<!--        LogIn Btn-->
+        <LinearLayout
+            android:id="@+id/loginBtn"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_btn"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:textColor="@color/view_background"
+                android:textStyle="bold"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text=" Already have an account"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:layout_gravity="center_horizontal"/>-->
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:orientation="horizontal">
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@color/black" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:textSize="18dp"
+                android:textColor="@color/fontColorHead"/>
+            <View
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/signUpBtn"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_btn"
+            android:orientation="vertical"
+            android:elevation="10dp"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/signup"
+                android:layout_gravity="center_horizontal"
+                android:textSize="18dp"
+                android:textColor="@color/view_background"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dontAcco"
+                android:textColor="@color/view_background"
+                android:layout_gravity="center_horizontal"
+                android:textSize="14dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

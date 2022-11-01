@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".SignUp">
+
+
+    <LinearLayout
+        android:id="@+id/otpBox"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter the Six digit OTP Number : "
+            android:textSize="16dp"
+            android:padding="20dp"
+            android:textColor="@color/black"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="100dp"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:layout_height="50dp"
+            android:layout_marginTop="50dp"
+            android:id="@+id/OTP"
+            android:layout_marginBottom="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLength="6"
+                android:background="@drawable/text_input_shape"
+                android:hint="@string/otp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:onClick="verifyOtp"
+            android:layout_width="wrap_content"
+            android:elevation="10dp"
+           android:background="@drawable/green_btn"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/submit"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:id="@+id/formBox"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/signup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="@string/signup"
+                    android:textColor="@color/fontColor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textStyle="bold"
+                    android:textSize="40sp"/>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    app:cardCornerRadius="50dp"
+                    android:layout_margin="10dp"
+                    android:elevation="10dp"
+                    android:background="@drawable/card_img"
+                    android:layout_gravity="center">
+                    <ImageView
+                        android:id="@+id/imgProfile"
+                        android:onClick="selectImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_baseline_person_24"/>
+                </androidx.cardview.widget.CardView>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"
+                    android:background="@drawable/blank"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:padding="5dp"
+                        android:background="@drawable/card_img"
+                        android:hint="@string/name"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/address"
+                    android:background="@drawable/blank"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:padding="5dp"
+                        android:imeOptions="actionNext"
+                        android:background="@drawable/card_img"
+                        android:hint="@string/address"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mobNo"
+                    android:layout_marginTop="10dp"
+                    app:counterMaxLength="10"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:inputType="phone"
+                        android:imeOptions="actionNext"
+                        android:maxLength="10"
+                        android:padding="5dp"
+                        android:background="@drawable/card_img"
+                        android:hint="@string/MobileNo"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/pass"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:imeOptions="actionNext"
+                        android:padding="5dp"
+                        android:background="@drawable/card_img"
+                        android:inputType="textPassword"
+                        android:hint="@string/password"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/repass"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    android:layout_marginBottom="20dp">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:imeOptions="actionSend"
+                        android:padding="5dp"
+                        android:background="@drawable/card_img"
+                        android:inputType="textPassword"
+                        android:hint="@string/RePass"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/signup"
+                    android:elevation="10dp"
+                    android:onClick="submit"
+                    android:background="@drawable/green_btn"/>
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

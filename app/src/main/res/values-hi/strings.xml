@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" >ई रिक्शा</string>
+    <string name="address">ई रिक्शा</string>
+    <string name="title_activity_maps">मानचित्र गतिविधि</string>
+    <string name="signup">साइन अप करें</string>
+    <string name="name">नाम</string>
+    <string name="MobileNo">मोबाइल नंबर</string>
+    <string name="password">पासवर्ड</string>
+    <string name="RePass">पासवर्ड फिर से दर्ज करें</string>
+    <string name="otp">ओ.टी.पी.</string>
+    <string name="login">लॉग इन करें</string>
+    <string name="update">कृपया एप्लिकेशन को अपडेट करें।</string>
+    <string name="addName">व्यक्ति जोड़ें</string>
+    <string name="onePerson">1 व्यक्ति</string>
+    <string name="threePerson">3 व्यक्ति</string>
+    <string name="fourPerson">4 व्यक्ति</string>
+    <string name="twoPerson">2 व्यक्ति</string>
+    <string name="changeLng">भाषा बदलो</string>
+    <string name="entrOTP">"छह अंकों का ओटीपी नंबर दर्ज करें:"</string>
+    <string name="submit">प्रस्तुत करना</string>
+    <string name="validOtpTxt">"ओटीपी केवल इसके लिए मान्य है:"</string>
+    <string name="resendTxt">"   ओटीपी पुनः भेजें"</string>
+    <string name="dontPass">"पासवर्ड नहीं है / "</string>
+    <string name="retriePas">पासवर्ड पुनः प्राप्त करें</string>
+    <string name="wlcTxt">ई रिक्शा में आपका स्वागत है</string>
+    <string name="or">"   या   "</string>
+    <string name="dontAcco">" कोई खाता नहीं है / नए उपयोगकर्ताओं के लिए"</string>
+    <string name="onePerPrice">1 व्यक्ति मूल्य :</string>
+    <string name="seleLoc">स्थान चुनें</string>
+    <string name="ttlDis">कुल दूरी :</string>
+    <string name="search">तलाशी</string>
+    <string name="passenger">यात्रियों</string>
+    <string name="nxtStop">अगला स्टाप</string>
+    <string name="gotPassList">एक यात्री सूची मिली</string>
+    <string name="finish">खत्म</string>
+    <string name="cancel">रद्द करना</string>
+
+    <string name="person">व्यक्ति</string>
+    <string name="Rs">रु</string>
+    <string name="add">जोड़े</string>
+    <string name="ttlPrice">कुल मूल्य</string>
+
+
+
+
+    <string name="versionName">1.8</string>
+    <string name="extrOPrice">सोलो ट्रिप के लिए अतिरिक्त 10 रु. मूल्य लिए जाएंगे।</string>
+
+    <string name="key">AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg</string>
+    
+<!--    <string name="locSe">loc से loc तक के रुपये हुआ.</string>-->
+<!--    <string name="locSe">अगला स्टाप loc है</string>-->
+<!--<string name="locSe">कुल दूरी 100 मीटर है</string>-->
+<!--loc से loc तक जाना है-->
+<!---->
+<!-- रु. हुआ.-->
+</resources>
