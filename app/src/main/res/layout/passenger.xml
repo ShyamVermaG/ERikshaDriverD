@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".passenger">
 
 
@@ -49,31 +50,92 @@
 
 
 
-        <TextView
-            android:id="@+id/startLoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:gravity="center_horizontal"
-            android:text="current Loc"
-            android:textColor="@color/blue"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/startLoc"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:text="current Loc"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="20sp" />-->
+
+
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/locationSpinStrtCon"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:background="@drawable/card_img_nor"-->
+<!--            android:orientation="vertical"-->
+<!--            android:visibility="gone"-->
+<!--            android:padding="5dp">-->
+
+<!--            <Spinner-->
+<!--                android:id="@+id/locationSpinStrt"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:outlineSpotShadowColor="@color/black" />-->
+<!--        </LinearLayout>-->
 
         <LinearLayout
-            android:id="@+id/locationSpinStrtCon"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/card_img_nor"
-            android:orientation="vertical"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:padding="5dp">
 
-            <Spinner
-                android:id="@+id/locationSpinStrt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:outlineSpotShadowColor="@color/black" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:text="@string/No"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/StartLoc"
+                android:textColor="@color/black"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:gravity="center"
+                android:text="@string/PerNo"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_weight="1">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/price"
+                android:textColor="@color/black"
+                android:textSize="20sp">
+
+            </TextView>
+
+
+
         </LinearLayout>
 
 

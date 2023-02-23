@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:background="@drawable/card_img_nor"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/mohalla"
@@ -13,21 +14,44 @@
         android:layout_margin="5dp"
         android:text="Mohalla"
         android:textColor="@color/black"
-        android:textSize="15dp"
+        android:textSize="18dp"
         android:layout_weight="1">
 
     </TextView>
 
     <TextView
         android:id="@+id/ttlPerson"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:text="Mohalla"
-        android:textColor="@color/black"
+        android:text="4"
+        android:textColor="@color/gray"
         android:textSize="15dp">
 
     </TextView>
+
+    <Button
+        android:id="@+id/reached"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reached"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@color/blue"/>
+    <Button
+        android:textAllCaps="false"
+        android:visibility="gone"
+        android:id="@+id/pickUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="@string/pickUp"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:background="@color/blue"/>
+
 
 
 </LinearLayout>

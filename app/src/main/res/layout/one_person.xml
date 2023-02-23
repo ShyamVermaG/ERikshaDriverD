@@ -36,39 +36,39 @@
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:onClick="AddPerson"
                 android:src="@drawable/ic_correct" />
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/startLoc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
-            android:gravity="center_horizontal"
-            android:text="current Loc"
-            android:textColor="@color/blue"
-            android:textSize="20sp" />
+<!--        <TextView-->
+<!--            android:id="@+id/startLoc"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_horizontal"-->
+<!--            android:layout_margin="10dp"-->
+<!--            android:gravity="center_horizontal"-->
+<!--            android:text="current Loc"-->
+<!--            android:textColor="@color/blue"-->
+<!--            android:textSize="20sp" />-->
 
-        <LinearLayout
-            android:id="@+id/locationSpinStrtCon"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/card_img_nor"
-            android:orientation="vertical"
-            android:visibility="gone"
-            android:padding="5dp">
+<!--        <LinearLayout-->
+<!--            android:id="@+id/locationSpinStrtCon"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:background="@drawable/card_img_nor"-->
+<!--            android:orientation="vertical"-->
+<!--            android:visibility="gone"-->
+<!--            android:padding="5dp">-->
 
-            <Spinner
-                android:id="@+id/locationSpinStrt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:outlineSpotShadowColor="@color/black" />
-        </LinearLayout>
+<!--            <Spinner-->
+<!--                android:id="@+id/locationSpinStrt"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:outlineSpotShadowColor="@color/black" />-->
+<!--        </LinearLayout>-->
 
 
         <LinearLayout
@@ -97,12 +97,11 @@
 
             </ImageView>
 
-            <Button
+            <ImageView
                 android:id="@+id/searchBtn"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_margin="0dp"
-                android:layout_height="match_parent"
-                android:text=""
+                android:layout_height="40dp"
                 android:background="@drawable/ic_baseline_search_24"
                 android:onClick="searchTxt"
                 android:textAllCaps="false"
@@ -112,16 +111,38 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/card_img_nor"
-            android:orientation="vertical"
-            android:padding="5dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/card_img_nor"
+                android:orientation="vertical"
+                android:padding="5dp">
 
-            <Spinner
-                android:id="@+id/locationSpin"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:outlineSpotShadowColor="@color/black" />
+                <Spinner
+                    android:id="@+id/locationSpinStrtMoh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:outlineSpotShadowColor="@color/black" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/card_img_nor"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <Spinner
+                    android:id="@+id/locationSpinStrtVill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:outlineSpotShadowColor="@color/black" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
 
@@ -210,6 +231,16 @@
         </LinearLayout>
 
 
+        <TextView
+            android:id="@+id/labour"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Labour"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
         <!--   all person price  -->
         <LinearLayout
             android:id="@+id/lastPriceC"
@@ -224,7 +255,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="  10  "
+                android:text="  0  "
                 android:textColor="@color/black"
                 android:textSize="18sp">
 
@@ -247,7 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="4"
+                android:text="0"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold">
@@ -271,7 +302,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="60 Rs"
+                android:text="0 Rs"
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textStyle="bold">

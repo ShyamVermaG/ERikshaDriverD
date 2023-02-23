@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">ERiksha Driver</string>
+    <string name="app_name">ERiksha dmin</string>
     <string name="address">Address</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="signup">Sign Up</string>
@@ -41,8 +41,58 @@
     <string name="add">Add</string>
     <string name="ttlPrice">Total Price</string>
 
-    <string name="key">AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg</string>
-    <string name="versionName">1.8</string>
+    <!--    <string name="key">AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg</string>-->
+    <string name="versionName">3.1</string>
     <string name="extrOPrice">Extra 10 Rs price will be taken for solo trip.</string>
 
+    <string name="privacyPolicy">privacy policy</string>
+    <string name="termCondition">Term Conditions</string>
+    <string name="privacyPolicyN">PrivacyPolicy</string>
+    <string name="termConditionN">Term Condition</string>
+    <string name="getPaid">GetPaid</string>
+    <string name="free">Free</string>
+    <string name="block">Your Activity has been blocked.</string>
+
+    <string name="speakLang">Speak Text</string>
+    <string name="addContainer">Luggage</string>
+    <string name="Labour">This is a luggage Transport.</string>
+    <string name="current_Loc">current Location</string>
+    <string name="price">Price</string>
+    <string name="PerNo">PerNo</string>
+    <string name="StartLoc">StartLoc</string>
+    <string name="No">No.</string>
+    <string name="Profile">Profile</string>
+    <string name="newPlaceStr">Add this new place</string>
+
+
+    <string name="IsThisCurrLoc">Is this your current Location ?</string>
+
+    <string name="Ok">Ok</string>
+    <string name="change">Change</string>
+    <string name="slctMoh">Select Mohalla</string>
+    <string name="slctVill">Select Village</string>
+    <string name="fifthPerson">5 Person</string>
+    <string name="plsSelctLoc">Please Select Location</string>
+    <string name="dataSuccStored">Your Data has been sucessfully stored</string>
+    <string name="usrAcqSucc">User Acquired Succesfully</string>
+    <string name="plsTryAga">Please try Again</string>
+    <string name="smeWenWrng">Something went wrong</string>
+    <string name="smeWenWrn">Something went wrong</string>
+    <string name="help">Help</string>
+
+    <string name="welc">Welcome to </string>
+    <string name="fullTirri">Full Tirri</string>
+    <string name="tirriOffTxt">"Currently Your Tirri is OFF . "</string>
+    <string name="start">Start</string>
+    <string name="setOffTirri">Off Tirri Service.</string>
+    <string name="ordDeta">Order Details</string>
+    <string name="DestLoc">Dest Loc</string>
+    <string name="transId">TransportId</string>
+    <string name="date">Date</string>
+    <string name="usrDetai">User Details</string>
+    <string name="travlSta">Travel Status</string>
+    <string name="pickUp">Pick Up</string>
+    <string name="reached">Reached</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
 </resources>

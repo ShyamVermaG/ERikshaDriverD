@@ -44,15 +44,79 @@
 
 
 
-    <string name="versionName">1.8</string>
+    <string name="versionName">3.2</string>
     <string name="extrOPrice">सोलो ट्रिप के लिए अतिरिक्त 10 रु. मूल्य लिए जाएंगे।</string>
 
-    <string name="key">AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg</string>
+<!--    <string name="key">AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg</string>-->
+
+    <string name="privacyPolicy">गोपनीयता नीति/</string>
+    <string name="termCondition">अवधि की शर्तें</string>
+    <string name="privacyPolicyN">गोपनीयता नीति</string>
+    <string name="termConditionN">नियम और शर्ते</string>
+
+    <string name="getPaid">भुगतान प्राप्त करना</string>
+    <string name="free">मुक्त</string>
+    <string name="block">आपकी गतिविधि को अवरोधित कर दिया गया है.</string>
     
-<!--    <string name="locSe">loc से loc तक के रुपये हुआ.</string>-->
+       <string name="speakLang">पाठ बोलो</string>
+    <string name="addContainer">सामान</string>
+       <string name="Labour">यह एक सामान परिवहन है</string>
+    <string name="current_Loc">वर्तमान स्थान</string>
+       <string name="price">कीमत</string>
+    <string name="PerNo">व्यक्तिसं</string>
+    
+    
+    <string name="StartLoc">स्थान प्रारंभ</string>
+    <string name="No">प्रति संख्या.</string>
+    <string name="Profile">खाता</string>
+
+
+    <string name="newPlaceStr">यह नया स्थान जोड़ें</string>
+
+
+
+ <string name="IsThisCurrLoc">क्या यह आपका वर्तमान स्थान है?</string>
+    
+    <string name="Ok">ठीक</string>
+    <string name="change">परिवर्तन</string>
+    <string name="slctMoh">मोहल्ला का चयन करें</string>
+    <string name="slctVill">गांव का चयन करें</string>
+    <string name="fifthPerson">5 व्यक्ति</string>
+    <string name="plsSelctLoc">कृपया स्थान का चयन करें</string>
+    <string name="dataSuccStored">आपका डेटा सफलतापूर्वक संग्रहीत किया गया है</string>
+    <string name="usrAcqSucc">उपयोगकर्ता सफलतापूर्वक प्राप्त कर लिया</string>
+    <string name="plsTryAga">कृपया पुन: प्रयास करें</string>
+    <string name="smeWenWrng">कुछ गलत हो गया</string>
+    <string name="smeWenWrn">कुछ गलत हो गया</string>
+    <string name="help">मदद </string>
+
+
+
+    <string name="welc">आपका स्वागत है </string>
+    <string name="fullTirri">फुल ई रिक्शा</string>
+
+    <!--<string name="update">कृपया एप्लिकेशन को अपडेट करें.</string>-->
+
+    <!--    <string name="locSe">loc से loc तक के रुपये हुआ.</string>-->
 <!--    <string name="locSe">अगला स्टाप loc है</string>-->
 <!--<string name="locSe">कुल दूरी 100 मीटर है</string>-->
 <!--loc से loc तक जाना है-->
 <!---->
 <!-- रु. हुआ.-->
+
+
+
+    <string name="tirriOffTxt">"वर्तमान में आपकी तिर्री बंद है।"</string>
+    <string name="start">शुरू</string>
+    <string name="setOffTirri">ऑफ तिरी सर्विस।</string>
+    <string name="ordDeta">ऑर्डर का विवरण</string>
+    <string name="DestLoc">गंतव्य स्थान</string>
+    <string name="transId">परिवहन आईडी</string>
+    <string name="date">तारीख</string>
+    <string name="usrDetai">उपयोगकर्ता विवरण</string>
+    <string name="travlSta">यात्रा की स्थिति</string>
+    <string name="pickUp">उठाना</string>
+    <string name="reached">पहुँच गया</string>
+    <string name="reject">अस्वीकार</string>
+    <string name="accept">स्वीकार करना</string>
 </resources>

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
     tools:context=".RouteERiksha">
-
-    <LinearLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="vertical">
 
 
 
 
         <LinearLayout
+            android:id="@+id/header"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toTopOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -31,6 +31,7 @@
                 android:id="@+id/nextStH"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:text="@string/nxtStop"
                 android:layout_marginLeft="10dp"
@@ -56,6 +57,10 @@
 
         <fragment
             android:id="@+id/map"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintTop_toBottomOf="@id/header"
+            map:layout_constraintEnd_toEndOf="parent"
+            map:layout_constraintBottom_toBottomOf="@id/guidelineMid"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
             android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -64,28 +69,62 @@
              />
 
 
-
-
-        <TextView
-            android:layout_height="wrap_content"
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineMid"
             android:layout_width="wrap_content"
-            android:text="@string/gotPassList"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_margin="10dp">
-
-        </TextView>
-
-
-        <LinearLayout
-            android:id="@+id/pickUpC"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            map:layout_constraintGuide_percent="0.6" />
 
-        </LinearLayout>
 
 
-    </LinearLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            map:layout_constraintBottom_toBottomOf="parent"
+            map:layout_constraintTop_toTopOf="@id/guidelineMid"
+            map:layout_constraintStart_toStartOf="parent"
+            map:layout_constraintEnd_toEndOf="parent"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/headingText"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:padding="5dp"
+                    android:text="@string/gotPassList"
+                    android:textSize="18sp"
+                    android:background="@color/view_background"
+                    android:textColor="@color/black">
+
+                </TextView>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New Loc"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:onClick="addNewLoc"
+                    android:background="@color/blue"/>
+
+                <LinearLayout
+                    android:id="@+id/pickUpC"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

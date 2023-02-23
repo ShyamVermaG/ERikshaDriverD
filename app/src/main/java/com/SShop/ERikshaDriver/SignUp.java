@@ -389,7 +389,7 @@ public class SignUp extends AppCompatActivity {
 
 
                                 //now we starting another activity
-                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                startActivity(new Intent(getApplicationContext(), SplashScreen.class));
                                 finish();
 
 
@@ -431,7 +431,7 @@ public class SignUp extends AppCompatActivity {
 
 
                                                 //now we starting another activity
-                                                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                                startActivity(new Intent(getApplicationContext(), SplashScreen.class));
                                                 finish();
 
 

@@ -162,14 +162,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         else
         {
 
-            Routing routing = new Routing.Builder()
-                    .travelMode(AbstractRouting.TravelMode.WALKING)
-                    .withListener(this)
-                    .alternativeRoutes(true)
-                    .waypoints(Start, End)
-                    .key(getResources().getString(R.string.key))  //also define your api key here.
-                    .build();
-            routing.execute();
+//            Routing routing = new Routing.Builder()
+//                    .travelMode(AbstractRouting.TravelMode.WALKING)
+//                    .withListener(this)
+//                    .alternativeRoutes(true)
+//                    .waypoints(Start, End)
+//                    .key(getResources().getString(R.string.key))  //also define your api key here.
+//                    .build();
+//            routing.execute();
         }
     }
 

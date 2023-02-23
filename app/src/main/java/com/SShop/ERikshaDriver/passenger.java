@@ -10,14 +10,10 @@ import android.content.res.Resources;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Looper;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,17 +28,12 @@ import com.directions.route.RoutingListener;
 import com.SShop.ERikshaDriver.databinding.ActivityMapsBinding;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -54,7 +45,10 @@ import com.google.mlkit.nl.translate.Translation;
 import com.google.mlkit.nl.translate.Translator;
 import com.google.mlkit.nl.translate.TranslatorOptions;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -63,80 +57,12 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener, RoutingListener {
 
 
-
-    TextToSpeech tts;
-
-    private void speakStr(String str){
-
-        tts = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i == TextToSpeech.SUCCESS) {
-                    int res = 0;
-                    //setting up text language
-                    SessionManager sessionManager = new SessionManager(getApplicationContext());
-                    if (sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_ENG)) {
-                        res = tts.setLanguage(Locale.ENGLISH);
-                    } else {
-                        res = tts.setLanguage(Locale.forLanguageTag(KeyCon.ERikshaDriver.Value.LNG_HIND));
-
-                    }
-
-//                    int result=tts.setLanguage(Locale.)
-                    if (res == TextToSpeech.LANG_MISSING_DATA || res == TextToSpeech.LANG_NOT_SUPPORTED) {
-                        Toast.makeText(getApplicationContext(), "Language Not supp", Toast.LENGTH_SHORT).show();
-                    } else {
-                        tts.setPitch(0.4f);
-                        tts.setSpeechRate(0.8f);
-                        tts.speak(str, TextToSpeech.QUEUE_FLUSH, null);
-                    }
-                }
-            }
-        });
-
-    }
-
-    //for textView on longPress it activated
-    private void speakTVLP(TextView view){
-
-        tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if(i==TextToSpeech.SUCCESS){
-                    int res=0;
-                    //setting up text language
-                    SessionManager sessionManager=new SessionManager(getApplicationContext());
-                    if(sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_ENG)){
-                        res=tts.setLanguage(Locale.ENGLISH);
-                    }else{
-                        res=tts.setLanguage(Locale.forLanguageTag(KeyCon.ERikshaDriver.Value.LNG_HIND));
-
-                    }
-
-//                    int result=tts.setLanguage(Locale.)
-                    if(res==TextToSpeech.LANG_MISSING_DATA|| res==TextToSpeech.LANG_NOT_SUPPORTED){
-                        Toast.makeText(getApplicationContext(),"Language Not supp",Toast.LENGTH_SHORT).show();
-                    }else{
-                        tts.setPitch(0.2f);
-                        tts.setSpeechRate(0.6f);
-                        tts.speak(view.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
-                    }
-                }
-            }
-        });
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
 //        tts.stop();
 //        tts.shutdown();
     }
-
-
-
-
 
 
     private GoogleMap mMap;
@@ -167,19 +93,23 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
     int ttlViewAdd = 0;
 
-    LocationRequest locationRequest;
+//    LocationRequest locationRequest;
 
-    TextView startLocV;
-    Spinner locationSpinStrt;
-    LinearLayout locationSpinStrtCon;
+//    TextView startLocV;
+//    Spinner locationSpinStrt;
+//    LinearLayout locationSpinStrtCon;
 
     //this will be stored for security purpose
-    Location fetched,selected;
+//    Location fetched, selected;
 
     SessionManager sessionManager;
-    Spinner locationSpin;
-    ArrayList<String> locationList=new ArrayList<>();
-    ArrayList<String> locationAddrList=new ArrayList<>();
+    //    Spinner locationSpin;
+    ArrayList<String> locationList = new ArrayList<>();
+    ArrayList<String> locationListType = new ArrayList<>();
+    ArrayList<String> locationAddrList = new ArrayList<>();
+
+    int ttlPerson = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,7 +120,6 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
         requestPermision();
 
 
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -199,95 +128,115 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
 //        ArrayAdapter<String>
         sessionManager = new SessionManager(this);
-        locationSpin = findViewById(R.id.locationSpin);
+        myLocation = KeyCon.strToLocation(sessionManager.getKeyCurrentLoc());
+//        locationSpin = findViewById(R.id.locationSpin);
 
-        locationList.add("Select location");
-        locationAddrList.add("abc");
+//        locationList.add("Select location");
+//        locationAddrList.add("abc");
         //get data from session of default locaitons and keys
         String tamp = sessionManager.getKeyAllKeyLocation();
 
+        ArrayList<String> locNameHE = new ArrayList<>();
         ArrayList<ArrayList<String>> data = new ArrayList<>();
 
 //        Toast.makeText(this, ""+tamp, Toast.LENGTH_SHORT).show();
         data = KeyCon.convertStrToDefaultLoc(tamp);
-        locationList = data.get(0);
-        locationAddrList = data.get(1);
+
+        locNameHE = data.get(0);
+        locationAddrList.addAll(data.get(1));
+
+        //here we get only language data
+        int lng = 0;
+        if (sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_HIND)) {
+            lng = 1;
+        }
+        ArrayList<String> ta = new ArrayList<>();
+        for (String a : locNameHE) {
+            ta = new ArrayList<>();
+            ta.addAll(Arrays.asList(a.split("<>")));
+            locationList.add(ta.get(lng));
+            locationListType.add(ta.get(2));
+
+        }
 
 
+//        locationList = data.get(0);
+//        locationAddrList = data.get(1);
 
 
-        startLocV=findViewById(R.id.startLoc);
-
-        locationSpinStrt=findViewById(R.id.locationSpinStrt);
-        locationSpinStrtCon=findViewById(R.id.locationSpinStrtCon);
-
-        startLocV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startLocV.setVisibility(View.GONE);
-                locationSpinStrtCon.setVisibility(View.VISIBLE);
-//                locationSpinStrtCon.
-            }
-        });
-
-        startLocV.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(startLocV);
-                return false;
-            }
-        });
-
-
-        //for setting up start loc
-        ArrayAdapter<String> locationAdapS = new ArrayAdapter<>(getApplication(), android.R.layout.simple_spinner_item, locationList);
-//        readyCurrLngList(locationList,locationAdapS);
-
-        locationAdapS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        //setting userAdapter
-        locationSpinStrt.setAdapter(locationAdapS);
-
-//        locationAdap.notifyDataSetChanged();
-        //this is for Season
-        locationSpinStrt.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                speakStr(locationList.get(i));
-                return false;
-            }
-        });
-        locationSpinStrt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (parent.getItemAtPosition(position).equals("Select location")) {
-
-//                    mMap.clear();
-
-                } else {
-
-//                    setTextAllLng(inputPl,locationList.get(position));
-                    startLocV.setText(locationList.get(position));
-
-                    fetched=myLocation;
-                    myLocation= KeyCon.strToLocation(locationAddrList.get(position));
-                    selected=myLocation;
-
-
-                    initiallizeall();
-                }
-
-                startLocV.setVisibility(View.VISIBLE);
-                locationSpinStrtCon.setVisibility(View.GONE);
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+//
+//        startLocV = findViewById(R.id.startLoc);
+//
+//        locationSpinStrt = findViewById(R.id.locationSpinStrt);
+//        locationSpinStrtCon = findViewById(R.id.locationSpinStrtCon);
+//
+//        startLocV.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startLocV.setVisibility(View.GONE);
+//                locationSpinStrtCon.setVisibility(View.VISIBLE);
+////                locationSpinStrtCon.
+//            }
+//        });
+//
+//        startLocV.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                KeyCon.speakTVLP(startLocV,getApplicationContext());
+//                return false;
+//            }
+//        });
+//
+//
+//        //for setting up start loc
+//        ArrayAdapter<String> locationAdapS = new ArrayAdapter<>(getApplication(), android.R.layout.simple_spinner_item, locationList);
+////        readyCurrLngList(locationList,locationAdapS);
+//
+//        locationAdapS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        //setting userAdapter
+//        locationSpinStrt.setAdapter(locationAdapS);
+//
+////        locationAdap.notifyDataSetChanged();
+//        //this is for Season
+//        locationSpinStrt.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                KeyCon.speakStr(locationList.get(i),getApplicationContext());
+//                return false;
+//            }
+//        });
+//        locationSpinStrt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                if (parent.getItemAtPosition(position).equals("Select location")) {
+//
+////                    mMap.clear();
+//
+//                } else {
+//
+////                    setTextAllLng(inputPl,locationList.get(position));
+//                    startLocV.setText(locationList.get(position));
+//
+//                    fetched = myLocation;
+//                    myLocation = KeyCon.strToLocation(locationAddrList.get(position));
+//                    selected = myLocation;
+//
+//
+//                    initiallizeall();
+//                }
+//
+//                startLocV.setVisibility(View.VISIBLE);
+//                locationSpinStrtCon.setVisibility(View.GONE);
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
+//
 
 //\\Initiallizing all ids
 
@@ -297,12 +246,15 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
 //        addPerson("khat", "adda", 2, 20);
 
+
         SessionManager sessionManager = new SessionManager(this);
-        if (sessionManager.getKeyAppLng() == KeyCon.ERikshaDriver.Value.LNG_HIND) {
-            changeLanguage(KeyCon.ERikshaDriver.Value.LNG_HIND);
-        } else {
+        if (sessionManager.getKeyAppLng() == KeyCon.ERikshaDriver.Value.LNG_ENG) {
             changeLanguage(KeyCon.ERikshaDriver.Value.LNG_ENG);
+        } else {
+            changeLanguage(KeyCon.ERikshaDriver.Value.LNG_HIND);
         }
+
+        initiallizeall();
     }
 
     TextView passengerT;
@@ -331,9 +283,21 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
     public void initiallizeall() {
 
         con.removeAllViews();
-        ttlViewAdd=0;
+        ttlViewAdd = 0;
 
         SessionManager sessionManager = new SessionManager(this);
+
+
+        //add all offline data
+        ArrayList<ArrayList<String>> data = new ArrayList<>();
+//        SessionManager sessionManager=new SessionManager(getApplicationContext());
+        data = sessionManager.showDataTravel();
+
+        for (ArrayList<String> a : data) {
+//            Toast.makeText(this,""+a.get(0)+":"+a.get(1)+":"+a.get(2)+":"+a.get(3)+":"+a.get(4),Toast.LENGTH_SHORT).show();
+            addPerson(a.get(0), a.get(1), Integer.parseInt(a.get(3)), a.get(2), 1.1f, a.get(5), a.get(4), false);
+        }
+
 
         String con = KeyCon.ERikshaTranspCon;
         String rikshaIDK = KeyCon.TransCon.ERikshaID;
@@ -341,47 +305,54 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
 //        .equalTo(rikshaIdV,rikshaIDK)
         //only take running orders for single userd
-        FirebaseDatabase.getInstance().getReference().child(con).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+        FirebaseDatabase.getInstance().getReference().child(con).orderByChild(KeyCon.TransCon.ERikshaID).equalTo(sessionManager.getKeyRikshaid()).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
             @Override
             public void onSuccess(DataSnapshot dataSnapshot) {
-                String status, id, from, to;
+                String status, id, from, to, passType;
                 int persN;
                 float price;
 
                 if (dataSnapshot.exists()) {
+                    //getting time
+                    Calendar calendar = Calendar.getInstance();
+                    String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
+
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
 
                         status = data.child(KeyCon.TransCon.Status).getValue(String.class);
-                        if(status.equals(KeyCon.TransCon.Value.TRAV_RUNNING)){
+                        if (status.equals(KeyCon.TransCon.Value.ValueTransport.TRAV_RUNNING) && data.child(KeyCon.TransCon.Date).getValue(String.class).equals(currentDate)) {
                             from = data.child(KeyCon.TransCon.StartLoc).getValue(String.class);
                             persN = Integer.parseInt(data.child(KeyCon.TransCon.TtlPerson).getValue(String.class));
                             id = data.getKey();
+                            passType = data.child(KeyCon.TransCon.PassengerType).getValue(String.class);
 
                             // not Avl for running only for cancelled or completed travels
                             to = data.child(KeyCon.TransCon.DestLoc).getValue(String.class);
                             price = Float.parseFloat(data.child(KeyCon.TransCon.Price).getValue(String.class));
 
 //                        Toast.makeText(passenger.this, "" + id + from + persN + to + price + status, Toast.LENGTH_SHORT).show();
-                            addPerson(id, from, persN, to, price, status);
+                            addPerson(id, from, persN, to, price, status, passType, true);
                         }
 
                     }
+
 
                     //for all type of passengerrs
                     for (DataSnapshot data : dataSnapshot.getChildren()) {
 
                         status = data.child(KeyCon.TransCon.Status).getValue(String.class);
-                        if(!status.equals(KeyCon.TransCon.Value.TRAV_RUNNING)){
+                        if (!status.equals(KeyCon.TransCon.Value.ValueTransport.TRAV_RUNNING) && data.child(KeyCon.TransCon.Date).getValue(String.class).equals(currentDate)) {
                             from = data.child(KeyCon.TransCon.StartLoc).getValue(String.class);
                             persN = Integer.parseInt(data.child(KeyCon.TransCon.TtlPerson).getValue(String.class));
                             id = data.getKey();
 
                             // not Avl for running only for cancelled or completed travels
+                            passType = data.child(KeyCon.TransCon.PassengerType).getValue(String.class);
                             to = data.child(KeyCon.TransCon.DestLoc).getValue(String.class);
                             price = Float.parseFloat(data.child(KeyCon.TransCon.Price).getValue(String.class));
 
 //                        Toast.makeText(passenger.this, "" + id + from + persN + to + price + status, Toast.LENGTH_SHORT).show();
-                            addPerson(id, from, persN, to, price, status);
+                            addPerson(id, from, persN, to, price, status, passType, true);
                         }
 
 
@@ -469,7 +440,17 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-    public void addPerson(String id, String from, int persN, String to, float onePrice, String status) {
+    //for container 4 and for person =person
+    public void updateTtlPersonRunning(int person) {
+        //update the status to free and also update the status of riksha
+        sessionManager.subBookedSeat(person);
+    }
+
+
+    public void addPerson(String id, String from, int persN, String to, float onePrice, String status, String passengerType, Boolean source) {
+
+
+//        Toast.makeText(this,from,Toast.LENGTH_SHORT).show();
 
 
         float ttlDist = 0;
@@ -486,11 +467,15 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
         LinearLayout conS;
 
-        TextView fromV, toV;
+        TextView fromV, toV, labour;
         TextView oneP, onePriceM;
+        Button change;
 
+        ImageView arrow;
 //\\Initiallizing all ids
 
+        change = view.findViewById(R.id.change);
+        arrow = view.findViewById(R.id.arrow);
         head = view.findViewById(R.id.head);
         No = view.findViewById(R.id.No);
         Name = view.findViewById(R.id.Name);
@@ -510,6 +495,7 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
         ttlDistV = view.findViewById(R.id.ttlDist);
         ttlPerson = view.findViewById(R.id.ttlPerson);
         ttlPrice = view.findViewById(R.id.ttlPrice);
+        labour = view.findViewById(R.id.labour);
 
 
         //only for convert lang
@@ -520,136 +506,146 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
         ttlDistT.setText(R.string.ttlDis);
 
 
+        if (sessionManager.getKeySpeak()) {
 
-        //for speaking
-         No.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(No);
-                return false;
-            }
-        });
-         strtLoc.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(strtLoc);
-                return false;
-            }
-        });
+            //for speaking
+            No.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(No, getApplicationContext());
+                    return false;
+                }
+            });
+            strtLoc.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(strtLoc, getApplicationContext());
+                    return false;
+                }
+            });
 
-         onePersT.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(onePersT);
-                return false;
-            }
-        });
-         ttlDistT.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(ttlDistT);
-                return false;
-            }
-        });
+            onePersT.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(onePersT, getApplicationContext());
+                    return false;
+                }
+            });
+            ttlDistT.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(ttlDistT, getApplicationContext());
+                    return false;
+                }
+            });
 
 
-         Name.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(Name);
-                return false;
-            }
-        });
-         strtLoc.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(strtLoc);
-                return false;
-            }
-        });
-         price.setOnLongClickListener(new View.OnLongClickListener() {
-             @Override
-             public boolean onLongClick(View view) {
-                 speakTVLP(price);
-                 return false;
-             }
-         });
-          ttlDistV.setOnLongClickListener(new View.OnLongClickListener() {
-              @Override
-              public boolean onLongClick(View view) {
-                  speakTVLP(ttlDistV);
-                  return false;
-              }
-          });
-          ttlPerson.setOnLongClickListener(new View.OnLongClickListener() {
-              @Override
-              public boolean onLongClick(View view) {
-                  speakTVLP(ttlPerson);
-                  return false;
-              }
-          });
-           ttlPrice.setOnLongClickListener(new View.OnLongClickListener() {
-               @Override
-               public boolean onLongClick(View view) {
-                   speakTVLP(ttlPrice);
-                   return false;
-               }
-           });
+            Name.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(Name, getApplicationContext());
+                    return false;
+                }
+            });
+            strtLoc.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(strtLoc, getApplicationContext());
+                    return false;
+                }
+            });
+            price.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(price, getApplicationContext());
+                    return false;
+                }
+            });
+            ttlDistV.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(ttlDistV, getApplicationContext());
+                    return false;
+                }
+            });
+            ttlPerson.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(ttlPerson, getApplicationContext());
+                    return false;
+                }
+            });
+            ttlPrice.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(ttlPrice, getApplicationContext());
+                    return false;
+                }
+            });
 
 //        LinearLayout conS;
 
-         fromV.setOnLongClickListener(new View.OnLongClickListener() {
-             @Override
-             public boolean onLongClick(View view) {
-                 speakTVLP(fromV);
-                 return false;
-             }
-         });
-         toV.setOnLongClickListener(new View.OnLongClickListener() {
-             @Override
-             public boolean onLongClick(View view) {
-                 speakTVLP(toV);
-                 return false;
-             }
-         });
-        oneP.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(oneP);
-                return false;
-            }
-        });
-        onePriceM.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                speakTVLP(onePriceM);
-                return false;
-            }
-        });
+            fromV.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(fromV, getApplicationContext());
+                    return false;
+                }
+            });
+            toV.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(toV, getApplicationContext());
+                    return false;
+                }
+            });
+            oneP.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(oneP, getApplicationContext());
+                    return false;
+                }
+            });
+            onePriceM.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    KeyCon.speakTVLP(onePriceM, getApplicationContext());
+                    return false;
+                }
+            });
 
 
+        }
 
 ///etting up text
 
-        String startS = findAreaName(KeyCon.strToLatLng(from));
+        String startS = findNearAreaName(KeyCon.strToLatLng(from));
         fromV.setText(startS);
         strtLoc.setText(startS);
 //        setTextAllLng(fromV,startS);
 
-        if (status.equals(KeyCon.TransCon.Value.TRAV_RUNNING)) {
+
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+
+        if (status.equals(KeyCon.TransCon.Value.ValueTransport.TRAV_RUNNING)) {
             //set the current value
-            to = findAreaName(new LatLng(myLocation.getLatitude(),myLocation.getLongitude()));
-//            onePrice = calculatePrice(from);
-            ttlDist = calculatePrice(from);
-            onePrice = ttlDist / 1000;
+            to = findNearAreaName(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()));
+
             toV.setText(to);
+
+//            onePrice = calculatePrice(from);
+            ttlDist = calculateDist(from);
+
+
+            onePrice=sessionManager.calculateOnePersonPr(KeyCon.strToLocation(from),myLocation,passengerType);
+
 //            setTextAllLng(toV,to);
 
 
         } else {
 
 
-            String endS = findAreaName(KeyCon.strToLatLng(to));
+            String endS = findNearAreaName(KeyCon.strToLatLng(to));
 
             Location locS = KeyCon.strToLocation(from);
             Location locE = KeyCon.strToLocation(to);
@@ -663,35 +659,105 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
         ttlDistV.setText(ttlDist + "m.");
 
-        //setting up price by each km
-        SessionManager sessionManager = new SessionManager(getApplicationContext());
-        onePrice *= sessionManager.getKeyOneKmPrice();
+
+        //changePrice
+//
+//
+//        int price=distM*oneP/1000;
+
 
         No.setText(String.valueOf(ttlViewAdd + 1) + ".");
-        Name.setText(persN + " " + getString(R.string.person));
+        Name.setText(persN + " ");
 
 
-        price.setText(String.format("%.2f",onePrice * persN) + " " + getString(R.string.Rs));
+        oneP.setText(String.format("%.2f", onePrice) + " " + getString(R.string.Rs));
+        onePriceM.setText(String.format("%.2f", onePrice) + "");
 
 
-        oneP.setText(String.format("%.2f",onePrice) + " " + getString(R.string.Rs));
-        onePriceM.setText(String.format("%.2f",onePrice) + "");
+        if (passengerType.equals(KeyCon.TransCon.Value.PassType_Passenger)) {
+            ttlPerson.setText(String.valueOf(persN));
+
+            labour.setVisibility(View.GONE);
+
+            price.setText(String.format("%.2f", onePrice * persN) + " " + getString(R.string.Rs));
+            ttlPrice.setText(String.format("%.2f", onePrice * persN) + " " + getString(R.string.Rs));
 
 
-        ttlPerson.setText(String.valueOf(persN));
+        } else {
+            //for container
+
+            labour.setVisibility(View.VISIBLE);
+
+            float ttlPriceT = 0;
+
+            //for 50,100,200,300 Kg weights
+            switch (persN) {
+                case 1: {
+                    ttlPriceT = onePrice * 5;
+                    ttlPerson.setText(String.valueOf(5));
+                    break;
+                }
+                case 2: {
+                    ttlPriceT = onePrice * 10;
+                    ttlPerson.setText(String.valueOf(10));
+                    break;
+                }
+                case 3: {
+                    ttlPriceT = onePrice * 20;
+                    ttlPerson.setText(String.valueOf(20));
+                    break;
+                }
+                case 4: {
+                    ttlPriceT = onePrice * 30;
+                    ttlPerson.setText(String.valueOf(30));
+                    break;
+                }
+            }
 
 
-        ttlPrice.setText(String.format("%.2f",onePrice * persN) + " " + getString(R.string.Rs));
+            price.setText(String.format("%.2f", ttlPriceT) + " " + getString(R.string.Rs));
+            ttlPrice.setText(String.format("%.2f", ttlPriceT) + " " + getString(R.string.Rs));
 
 
+        }
+
+
+        change.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                KeyCon.speakStr(change.getText().toString(), getApplicationContext());
+                return false;
+            }
+        });
+        arrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (conS.getVisibility() == View.VISIBLE) {
+                    conS.setVisibility(View.GONE);
+//                    arrow.setVisibility(View.GONE);
+                    strtLoc.setVisibility(View.VISIBLE);
+                } else {
+                    KeyCon.speakStr(getString(R.string.ttlPrice) + ttlPrice.getText().toString(), getApplicationContext());
+                    conS.setVisibility(View.VISIBLE);
+
+//                    arrow.setVisibility(View.VISIBLE);
+                    strtLoc.setVisibility(View.GONE);
+                }
+            }
+        });
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (conS.getVisibility() == View.VISIBLE) {
                     conS.setVisibility(View.GONE);
+//                    arrow.setVisibility(View.GONE);
+                    strtLoc.setVisibility(View.VISIBLE);
                 } else {
-                    speakStr(getString(R.string.ttlPrice)+ttlPrice.getText().toString());
+                    KeyCon.speakStr(getString(R.string.ttlPrice) + ttlPrice.getText().toString(), getApplicationContext());
                     conS.setVisibility(View.VISIBLE);
+
+//                    arrow.setVisibility(View.VISIBLE);
+                    strtLoc.setVisibility(View.GONE);
                 }
             }
         });
@@ -708,7 +774,7 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 //        });
 
 
-        if (status.equals(KeyCon.TransCon.Value.TRAV_RUNNING)) {
+        if (status.equals(KeyCon.TransCon.Value.ValueTransport.TRAV_RUNNING)) {
             //yellow
             view.setBackground(getResources().getDrawable(R.drawable.card_img));
 
@@ -722,13 +788,38 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
 //                }
 //            });
-            view.setOnLongClickListener(new View.OnLongClickListener() {
+            change.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View view) {
+                public void onClick(View view) {
 
+//                }
+//            });
+//            view.setOnLongClickListener(new View.OnLongClickListener() {
+//                @Override
+//                public boolean onLongClick(View view) {
 
                     final AlertDialog.Builder alert = new AlertDialog.Builder(passenger.this);
                     View mview = passenger.this.getLayoutInflater().inflate(R.layout.yes_no_dialog, null);
+
+                    TextView freeRide = mview.findViewById(R.id.freeRide);
+
+
+                    FirebaseDatabase.getInstance().getReference().child("Control").child(KeyCon.ERikshaDriverCon).child(KeyCon.ERikshaDriverFree).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                        @Override
+                        public void onSuccess(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                String data = dataSnapshot.getValue(String.class);
+
+                                if (data.equals(KeyCon.True)) {
+//                                    mview.setBackgroundColor(getColor(R.color.green));
+//                                    freeRide.setTextColor(getColor(R.color.white));
+                                    freeRide.setVisibility(View.VISIBLE);
+                                } else {
+                                    freeRide.setVisibility(View.GONE);
+                                }
+                            }
+                        }
+                    });
 
 
                     TextView cancelT = mview.findViewById(R.id.cancelT);
@@ -746,79 +837,189 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
                     final AlertDialog alertDialog = alert.create();
                     alertDialog.setCanceledOnTouchOutside(true);
 
-                    btn_cancel.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            speakStr(getString(R.string.cancel));
-                            return false;
-                        }
-                    });
-                    btn_ok.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            speakStr(getString(R.string.finish));
-                            return false;
-                        }
-                    });
-                    btn_cancel.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alertDialog.dismiss();
-                            //update the travel
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put(KeyCon.TransCon.Price, String.valueOf(finalOnePrice1));
-                            hashMap.put(KeyCon.TransCon.DestLoc, (myLocation.getLatitude())+","+String.valueOf(myLocation.getLongitude()));
-                            hashMap.put(KeyCon.TransCon.Status, KeyCon.TransCon.Value.TRAV_CANCELED);
+                    if (sessionManager.getKeySpeak()) {
+                        btn_cancel.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View view) {
+                                KeyCon.speakStr(getString(R.string.cancel), getApplicationContext());
+                                return false;
+                            }
+                        });
+                        btn_ok.setOnLongClickListener(new View.OnLongClickListener() {
+                            @Override
+                            public boolean onLongClick(View view) {
+                                KeyCon.speakStr(getString(R.string.finish), getApplicationContext());
+                                return false;
+                            }
+                        });
 
-                            FirebaseDatabase.getInstance().getReference().child(KeyCon.ERikshaTranspCon).child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    con.removeView(view);
-                                    Toast.makeText(passenger.this, "Ride Cancelled Succefully", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                    //if data come from database
+                    if (source) {
+                        btn_cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                //here we update riksha status
+                                if (passengerType.equals(KeyCon.TransCon.Value.PassType_Container)) {
+                                    updateTtlPersonRunning(4);
+                                } else {
+                                    updateTtlPersonRunning(persN);
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(passenger.this, "Please try Again", Toast.LENGTH_SHORT).show();
 
+
+                                alertDialog.dismiss();
+//                                updateChgLocIfAva();
+                                //update the travel
+                                HashMap<String, Object> hashMap = new HashMap<>();
+                                if (passengerType.equals(KeyCon.TransCon.Value.PassType_Passenger)) {
+                                    hashMap.put(KeyCon.TransCon.Price, String.valueOf(finalOnePrice1));
+                                } else
+                                    hashMap.put(KeyCon.TransCon.Price, String.valueOf(finalOnePrice1));
+
+                                hashMap.put(KeyCon.TransCon.DestLoc, (myLocation.getLatitude()) + "," + String.valueOf(myLocation.getLongitude()));
+                                hashMap.put(KeyCon.TransCon.Status, KeyCon.TransCon.Value.ValueTransport.TRAV_CANCEL_RUNNING_DRIVER);
+
+                                FirebaseDatabase.getInstance().getReference().child(KeyCon.ERikshaTranspCon).child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+
+
+                                        con.removeView(view);
+                                        Toast.makeText(passenger.this, "Ride Cancelled Succefully", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(passenger.this, "Please try Again", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
+
+
+                            }
+                        });
+
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                //here we update riksha status
+                                if (passengerType.equals(KeyCon.TransCon.Value.PassType_Container)) {
+                                    updateTtlPersonRunning(4);
+                                } else {
+                                    updateTtlPersonRunning(persN);
                                 }
-                            });
 
 
-                        }
-                    });
+                                alertDialog.dismiss();
+                                //update the travel
+//                                updateChgLocIfAva();
 
-                    btn_ok.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+                                HashMap<String, Object> hashMap = new HashMap<>();
+                                hashMap.put(KeyCon.TransCon.Price, String.valueOf(finalOnePrice));
+                                hashMap.put(KeyCon.TransCon.DestLoc, (myLocation.getLatitude()) + "," + String.valueOf(myLocation.getLongitude()));
+                                hashMap.put(KeyCon.TransCon.Status, KeyCon.TransCon.Value.ValueTransport.TRAV_FINISHED);
 
-                            alertDialog.dismiss();
-                            //update the travel
+                                //this is for Free Ride verification
+                                FirebaseDatabase.getInstance().getReference().child("Control").child(KeyCon.ERikshaDriverCon).child(KeyCon.ERikshaDriverFree).get().addOnSuccessListener(new OnSuccessListener<DataSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DataSnapshot dataSnapshot) {
 
-                            HashMap<String, Object> hashMap = new HashMap<>();
-                            hashMap.put(KeyCon.TransCon.Price, String.valueOf(finalOnePrice));
-                            hashMap.put(KeyCon.TransCon.DestLoc, (myLocation.getLatitude())+","+String.valueOf(myLocation.getLongitude()));
-                            hashMap.put(KeyCon.TransCon.Status, KeyCon.TransCon.Value.TRAV_FINISHED);
+                                        //this is for cheking free available
+                                        if (dataSnapshot.getValue(String.class).equals(KeyCon.True))
+                                            hashMap.put(KeyCon.TransCon.NotPaid, KeyCon.True);
 
-                            FirebaseDatabase.getInstance().getReference().child(KeyCon.ERikshaTranspCon).child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    con.removeView(view);
-                                    Toast.makeText(passenger.this, "Successlly Updated", Toast.LENGTH_SHORT).show();
+                                        FirebaseDatabase.getInstance().getReference().child(KeyCon.ERikshaTranspCon).child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+                                                con.removeView(view);
+                                                Toast.makeText(passenger.this, "Free Ride Successlly Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(passenger.this, "Please try Again", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        FirebaseDatabase.getInstance().getReference().child(KeyCon.ERikshaTranspCon).child(id).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void unused) {
+
+                                                con.removeView(view);
+                                                Toast.makeText(passenger.this, "Successlly Updated", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(passenger.this, "Please try Again", Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
+                                    }
+                                });
+
+
+                            }
+                        });
+
+                    } else {
+                        //if data come from session
+                        btn_cancel.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                //here we update riksha status
+                                if (passengerType.equals(KeyCon.TransCon.Value.PassType_Container)) {
+                                    updateTtlPersonRunning(4);
+                                } else {
+                                    updateTtlPersonRunning(persN);
                                 }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(passenger.this, "Please try Again", Toast.LENGTH_SHORT).show();
 
+                                alertDialog.dismiss();
+//                                updateChgLocIfAva();
+
+                                //update the travel
+                                sessionManager.chgStatusDestDataTravel(id, KeyCon.TransCon.Value.ValueTransport.TRAV_CANCEL_RUNNING_DRIVER, String.valueOf(myLocation.getLatitude()) + "," + String.valueOf(myLocation.getLongitude()));
+                                Toast.makeText(passenger.this, "Ride Cancelled Succefully !", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                        btn_ok.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //here we update riksha status
+                                if (passengerType.equals(KeyCon.TransCon.Value.PassType_Container)) {
+                                    updateTtlPersonRunning(4);
+                                } else {
+                                    updateTtlPersonRunning(persN);
                                 }
-                            });
 
 
-                        }
+                                alertDialog.dismiss();
+//                                updateChgLocIfAva();
+                                //update the travel
+                                sessionManager.chgStatusDestDataTravel(id, KeyCon.TransCon.Value.ValueTransport.TRAV_FINISHED, String.valueOf(myLocation.getLatitude()) + "," + String.valueOf(myLocation.getLongitude()));
+                                Toast.makeText(passenger.this, "Ride Finished Succefully !", Toast.LENGTH_SHORT).show();
 
-                        //for checking password
-                    });
+
+                            }
+                        });
+
+
+                    }
+
+                    //for checking password
 
                     alertDialog.show();
 
@@ -857,17 +1058,21 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 ////                    alert.show();
 //                    alertDialog.show();
 
-                    return false;
+//                    return false;
                 }
             });
 
 
-        } else if (status.equals(KeyCon.TransCon.Value.TRAV_FINISHED)) {
+        } else if (status.equals(KeyCon.TransCon.Value.ValueTransport.TRAV_FINISHED)) {
             //green
             view.setBackground(getResources().getDrawable(R.drawable.card_img_nor_green));
-        } else if (status.equals(KeyCon.TransCon.Value.TRAV_CANCELED)) {
+        } else if (status.equals(KeyCon.TransCon.Value.ValueTransport.TRAV_RUNNING)) {
+
+        } else {
+//            KeyCon.TransCon.Value.ValueTransport.
             //red
             view.setBackground(getResources().getDrawable(R.drawable.card_img_nor_red));
+
         }
 
         ttlViewAdd++;
@@ -875,9 +1080,7 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
     }
 
 
-
-    private void setTextAllLng(TextView view,String areaName){
-
+    private void setTextAllLng(TextView view, String areaName) {
 
 
         TranslatorOptions translatorOptionsHindi = new TranslatorOptions.Builder()
@@ -888,11 +1091,11 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
         Translator translatorHindi = Translation.getClient(translatorOptionsHindi);
 
 
-        SessionManager sessionManager=new SessionManager(this);
-        if(sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_ENG)){
+        SessionManager sessionManager = new SessionManager(this);
+        if (sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_ENG)) {
             //for english language direct set text
             view.setText(areaName);
-        }else if(sessionManager.getKeyHindiLanguageDownld()){
+        } else if (sessionManager.getKeyHindiLanguageDownld()) {
             translatorHindi.translate(areaName)
                     .addOnSuccessListener(new OnSuccessListener<String>() {
                         @Override
@@ -906,7 +1109,7 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
                             view.setText(e.toString());
                         }
                     });
-        }else{
+        } else {
             DownloadConditions downloadConditions = new DownloadConditions.Builder()
                     .requireWifi()
                     .build();
@@ -952,7 +1155,7 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
 
     //this will set the area name
     //according to the nearest predefined locations
-    private String findAreaName(LatLng latLng) {
+    private String findNearAreaName(LatLng latLng) {
 
         float distnaceMin = 1000000;
         String areaName = "Null";
@@ -990,11 +1193,35 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
             }
         }
 
-        return areaName;
+        //here we set area name according to the language
+        ArrayList<String> hee = new ArrayList<>();
+        hee.addAll(Arrays.asList(areaName.split("<>")));
+
+        if (sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_ENG))
+            return hee.get(0);
+        else
+            return hee.get(1);
+
+//        return areaName;
     }
 
 
-    private int calculatePrice(String data) {
+    //this will return the address of location if it present in list else null
+
+    private Location findNearAreaLoc(String locName) {
+        for (int i = 0; i < locationList.size(); i++) {
+            if (locationList.get(i) == locName) {
+                return KeyCon.strToLocation(locationAddrList.get(i));
+            }
+        }
+
+        return null;
+
+//        return areaName;
+    }
+
+
+    private int calculateDist(String data) {
         String mD[] = data.split(",");
         Location location = new Location(LocationManager.GPS_PROVIDER);
 
@@ -1062,44 +1289,47 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-
-        locationRequest = new LocationRequest();
-//        locationRequest.setInterval()
-        locationRequest.setInterval(5000); // two minute interval
-        locationRequest.setFastestInterval(2000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-
-        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, new LocationCallback() {
-            @Override
-            public void onLocationResult(@NonNull LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                if (locationResult != null && locationResult.getLocations().size() > 0) {
-                    LocationServices.getFusedLocationProviderClient(passenger.this).removeLocationUpdates(this);
-                    int index = locationResult.getLocations().size() - 1;
-                    myLocation=locationResult.getLocations().get(index);
-                    setAreaNameStrt(new LatLng(myLocation.getLatitude(),myLocation.getLongitude()));
-//                    myLocation = location;
-
-                    initiallizeall();
-                }else{
-                    Toast.makeText(passenger.this,"Not found",Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, Looper.getMainLooper());
-
-        LocationServices.getFusedLocationProviderClient(getApplicationContext()).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null) {
-//                    myLocation = location;
+//
+//        locationRequest = new LocationRequest();
+////        locationRequest.setInterval()
+//        locationRequest.setInterval(5000); // two minute interval
+//        locationRequest.setFastestInterval(2000);
+//        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//
+//
+//        LocationServices.getFusedLocationProviderClient(this).requestLocationUpdates(locationRequest, new LocationCallback() {
+//            @Override
+//            public void onLocationResult(@NonNull LocationResult locationResult) {
+//                super.onLocationResult(locationResult);
+//                if (locationResult != null && locationResult.getLocations().size() > 0) {
+//                    LocationServices.getFusedLocationProviderClient(passenger.this).removeLocationUpdates(this);
+//                    int index = locationResult.getLocations().size() - 1;
+//                    myLocation = locationResult.getLocations().get(index);
+//                    setAreaNameStrt(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()));
+////                    myLocation = location;
+//
 //
 //                    initiallizeall();
-
-
-                }
-            }
-        });
+//
+//
+//                } else {
+//                    Toast.makeText(passenger.this, "Not found", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        }, Looper.getMainLooper());
+//
+//        LocationServices.getFusedLocationProviderClient(getApplicationContext()).getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+//            @Override
+//            public void onSuccess(Location location) {
+//                if (location != null) {
+////                    myLocation = location;
+////
+////                    initiallizeall();
+//
+//
+//                }
+//            }
+//        });
 
 
     }
@@ -1112,34 +1342,100 @@ public class passenger extends FragmentActivity implements OnMapReadyCallback,
         onBackPressed();
     }
 
-    private void setAreaNameStrt(LatLng latLng) {
 
+    //here we check for near location belongs to which category
+    private Boolean checkNearIsVillage(Location startPo) {
+
+        Boolean vill = true;
+
+
+        //here we find min distance point
         float distnaceMin = 1000000;
-        String areaName = "Null";
+        String areaName = "Null<>Null<>";
+//        String locaMinS = "20.232323";
 
-        Location startPo = new Location("locationA");
         Location endPo = new Location("locationB");
-
-        startPo.setLatitude(latLng.latitude);
-        startPo.setLongitude(latLng.longitude);
 
 
         float tamp = 0;
-        for (int i = 0; i < locationAddrList.size(); i++) {
+        //bcz we niglet selectlocation
+        for (int i = 1; i < locationAddrList.size(); i++) {
 
             endPo = KeyCon.strToLocation(locationAddrList.get(i));
 
             tamp = startPo.distanceTo(endPo);
-            if (distnaceMin > tamp) {
+            if (distnaceMin >= tamp) {
                 distnaceMin = tamp;
+//                locaMinS = locationAddrList.get(i);
                 areaName = locationList.get(i);
+                if (locationListType.get(i).equals("0")) {
+                    vill = false;
+                }
+//                else{
+//                    vill=true;
+//                }
             }
         }
 
 
-//        nextSt.setText(areaName);
-        startLocV.setText(areaName);
-//        setTextAllLng(startLocV, areaName);
+//        Toast.makeText(this,areaName, Toast.LENGTH_SHORT).show();
+//        //here we check if the name is known as village
+//        //find for 0
+//        for (int i = 0; i < locationList.size(); i++) {
+//            //if it found tt it town
+//            //0 for mohallla  and 1 for village
+//
+//            //if town is found in list then we update the return
+//            if (locationList.get(i).equals(areaName) && locationListType.get(i).equals("0")) {
+//                vill = false;
+//            }
+//        }
+
+
+//        Toast.makeText(this," "+vill, Toast.LENGTH_SHORT).show();
+
+        return vill;
+
+
     }
+
+//    private void setAreaNameStrt(LatLng latLng) {
+//
+//        float distnaceMin = 1000000;
+//        String areaName = "Null";
+//
+//        Location startPo = new Location("locationA");
+//        Location endPo = new Location("locationB");
+//
+//        startPo.setLatitude(latLng.latitude);
+//        startPo.setLongitude(latLng.longitude);
+//
+//
+//        float tamp = 0;
+//        for (int i = 0; i < locationAddrList.size(); i++) {
+//
+//            endPo = KeyCon.strToLocation(locationAddrList.get(i));
+//
+//            tamp = startPo.distanceTo(endPo);
+//            if (distnaceMin > tamp) {
+//                distnaceMin = tamp;
+//                areaName = locationList.get(i);
+//            }
+//        }
+//
+//
+//        //here we set area name according to the language
+//        ArrayList<String> hee = new ArrayList<>();
+//        hee.addAll(Arrays.asList(areaName.split("<>")));
+//
+//        if (sessionManager.getKeyAppLng().equaddls(KeyCon.ERikshaDriver.Value.LNG_ENG))
+//            startLocV.setText(hee.get(0));
+//        else
+//            startLocV.setText(hee.get(1));
+//
+////        nextSt.setText(areaName);
+//        startLocV.setText(areaName);
+////        setTextAllLng(startLocV, areaName);
+//    }
 
 }

@@ -15,44 +15,6 @@ import java.util.Locale;
 
 public class LoginFront extends AppCompatActivity {
 
-    TextToSpeech tts;
-    //for textView on longPress it activated
-    private void speakTVLP(TextView view){
-
-        tts=new TextToSpeech(this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if(i==TextToSpeech.SUCCESS){
-                    int res=0;
-                    //setting up text language
-                    SessionManager sessionManager=new SessionManager(getApplicationContext());
-                    if(sessionManager.getKeyAppLng().equals(KeyCon.ERikshaDriver.Value.LNG_ENG)){
-                        res=tts.setLanguage(Locale.ENGLISH);
-                    }else{
-                        res=tts.setLanguage(Locale.forLanguageTag("hin"));
-
-                    }
-
-//                    int result=tts.setLanguage(Locale.)
-                    if(res==TextToSpeech.LANG_MISSING_DATA|| res==TextToSpeech.LANG_NOT_SUPPORTED){
-                        Toast.makeText(getApplicationContext(),"Language Not supp",Toast.LENGTH_SHORT).show();
-                    }else{
-                        tts.setPitch(0.2f);
-                        tts.setSpeechRate(0.6f);
-                        tts.speak(view.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
-                    }
-                }
-            }
-        });
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        tts.stop();
-//        tts.shutdown();
-    }
 
     LinearLayout loginBtn,signupBtn;
 

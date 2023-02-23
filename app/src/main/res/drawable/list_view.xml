@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <item android:state_pressed="false">
+
+        <shape android:shape="rectangle">
+
+            <solid android:color="@color/view_background" />
+        </shape>
+
+    </item>
+
+    <!--            &lt;!&ndash;    android:left="1dp" android:right="1dp"&ndash;&gt;-->
+    <!--            <item android:bottom="1dp">-->
+    <!--                <shape android:shape="rectangle">-->
+    <!--                    <solid android:color="@color/white" />-->
+    <!--                    &lt;!&ndash;            <corners android:bottomLeftRadius="5dp"&ndash;&gt;-->
+    <!--                    &lt;!&ndash;                android:bottomRightRadius="5dp"/>&ndash;&gt;-->
+    <!--                </shape>-->
+    <!--            </item>-->
+
+    <!--        </layer-list>-->
+
+
+    <item android:state_pressed="true">
+        <ripple android:color="@color/view_background" tools:targetApi="lollipop">
+
+<!--            <item>-->
+<!--                <shape android:shape="rectangle">-->
+
+
+                    <!--                    <layer-list>-->
+                    <item>
+                        <shape android:shape="rectangle">
+
+                            <stroke android:width="0.2dp" android:color="@color/black" />
+                            <solid android:color="@color/ripple" />
+                        </shape>
+
+                    </item>
+
+
+<!--                </shape>-->
+<!--            </item>-->
+        </ripple>
+    </item>
+</selector>
+
+
+    <!--    &lt;!&ndash;    android:left="1dp" android:right="1dp"&ndash;&gt;-->
+    <!--<item android:bottom="1dp" >-->
+    <!--<shape android:shape="rectangle">-->
+    <!--    <solid android:color="@color/white"/>-->
+    <!--    &lt;!&ndash;            <corners android:bottomLeftRadius="5dp"&ndash;&gt;-->
+    <!--    &lt;!&ndash;                android:bottomRightRadius="5dp"/>&ndash;&gt;-->
+    <!--</shape>-->
+    <!--</item>-->
+
+    <!--    </layer-list>-->

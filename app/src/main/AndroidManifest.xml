@@ -6,29 +6,75 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
+        android:configChanges="locale"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@drawable/e_riksha"
         android:label="@string/app_name"
-        android:configChanges="locale"
         android:roundIcon="@drawable/e_riksha"
         android:supportsRtl="true"
         android:theme="@style/Theme.ERikshaDriver"
         tools:targetApi="31">
         <activity
-            android:name="UpdateActivity"
+            android:name=".DriversOnline"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".StartActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".InsideOrder"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCR8sGD2FUM6zRaRds_RubV4ctVJXnV_nw" />
+
+        <activity
+            android:name=".help_list"
             android:exported="false" />
         <activity
-            android:name="BlockActivity"
+            android:name=".HelpActivity"
             android:exported="false" />
         <activity
-            android:name="SplashScreen"
-            android:exported="true" >
+            android:name=".ValidateDataUpload"
+            android:exported="false" />
+        <activity
+            android:name=".Profile"
+            android:exported="false" />
+        <activity
+            android:name=".TermsCondition"
+            android:exported="false" />
+        <activity
+            android:name=".PrivacyPolicy"
+            android:exported="false" />
+        <activity
+            android:name=".UpdateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BlockActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashScreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,47 +82,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="LoginFront"
+            android:name=".LoginFront"
             android:exported="false" />
         <activity
-            android:name="LogIn"
+            android:name=".LogIn"
             android:exported="false" />
         <activity
-            android:name="SignUp"
+            android:name=".SignUp"
             android:exported="false" />
         <activity
-            android:name="RouteERiksha"
+            android:name=".RouteERiksha"
             android:exported="false" />
         <activity
-            android:name="onePerson"
+            android:name=".onePerson"
             android:exported="false" />
         <activity
-            android:name="passenger"
+            android:name=".passenger"
             android:exported="false" />
         <activity
-            android:name="HomeActivity"
-            android:exported="true">
-
-        </activity>
-        <!--
-             TODO: Before you run your application, you need a Google Maps API key.
-
-             To get one, follow the directions here:
-
-                https://developers.google.com/maps/documentation/android-sdk/get-api-key
-
-             Once you have your API key (it starts with "AIza"), define a new property in your
-             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
-             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
-        -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB90S7ctS975iltlA5OAObp19JWdzDTTZg" />
-
+            android:name=".HomeActivity"
+            android:exported="true" />
         <activity
-            android:name="MapsActivity"
+            android:name=".MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
+
+        <service
+            android:name=".ExampleJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>
